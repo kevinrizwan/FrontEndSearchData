@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filter Tabel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<center>
+        <img src="ANTARES.jpg" alt="ANTARES" width="200" height="200">
+        <img src="HRD_LOGO.png" alt="HRD ANTARES" width="200" height="200">
+        <br>
+        <br>
+        <h2> Website Khusus HRD Check Blacklist</h2>
+</center>
+
+<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Cari data">
+
+<table id="myTable">
+    <tr>
+        <th>No.</th>
+        <th>UCP</th>
+        <th>Nama IC</th>
+        <th>Divisi</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Sanetan</td>
+        <td>Dominguez Martinez</td>
+        <td>Head Marketing</td>
+    </tr>
+</table>
+
+<script>
+// Mengatur nomor otomatis pada setiap baris tabel
+var table = document.getElementById("myTable");
+for (var i = 1; i < table.rows.length; i++) {
+    table.rows[i].cells[0].innerText = i;
+}
+
+function filterTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1]; // Ubah angka untuk memfilter kolom lain
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+
+</body>
+</html>
