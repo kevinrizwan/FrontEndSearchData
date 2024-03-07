@@ -69,7 +69,7 @@ function filterTable() {
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1]; // Ubah angka untuk memfilter kolom lain
+        td = tr[i].getElementsByTagName("td")[1,2]; // Ubah angka untuk memfilter kolom lain
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
