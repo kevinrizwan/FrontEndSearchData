@@ -26,6 +26,20 @@
             margin-bottom: 10px;
             box-sizing: border-box;
         }
+        button {
+        padding: 8px 16px;
+        margin: 0 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #1351fc;
+        }
+
     </style>
 </head>
 <body>
@@ -40,68 +54,78 @@
 <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Cari data">
 
 <table id="myTable">
+    <thead>
     <tr>
         <th>No.</th>
         <th>UCP</th>
         <th>Nama IC</th>
         <th>Divisi/Reason</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
-        <td></td>
+        <td>1</td>
         <td>Sanetan</td>
         <td>Dominguez Martinez</td>
         <td>Head Marketing</td>
     </tr>
     <tr>
-        <td></td>
+        <td>2</td>
         <td>rafipeliharaangw</td>
         <td>David Dasilver</td>
         <td>Plagiat Aplicant use AI</td>
     </tr>
     <tr>
-        <td></td>
+        <td>3</td>
         <td>-</td>
         <td>Hobert Halyn</td>
         <td>Inactive</td>
     </tr>
     <tr>
-        <td></td>
+        <td>4</td>
         <td>-</td>
         <td>Kyle Kenobi</td>
         <td>Inactive</td>
     </tr>
     <tr>
-        <td></td>
+        <td>5</td>
         <td>-</td>
         <td>Agastha Lupreux</td>
         <td>Inactive</td>
     </tr>
     <tr>
-        <td></td>
+        <td>6</td>
         <td>-</td>
         <td>Ace Walker</td>
         <td>Inactive</td>
     </tr>
     <tr>
-        <td></td>
+        <td>7</td>
         <td>Kranz</td>
         <td>Khushnoods Ashleen</td>
         <td>Melanggar Rules Recruitment (penghapusan pesan)</td>
     </tr>
     <tr>
-        <td></td>
+        <td>8</td>
         <td>-</td>
         <td>Branley Cooper</td>
         <td>Melanggar Rules Recruitment (penghapusan pesan)</td>
     </tr>
+    </tbody>
 </table>
+</br>
+
+<div id="pagination">
+    <button onclick="previousPage()">Previous</button>
+    <span id="pageIndicator">Page 1</span>
+    <button onclick="nextPage()">Next</button>
+</div>
 
 <script>
-// Mengatur nomor otomatis pada setiap baris tabel
 var table = document.getElementById("myTable");
-for (var i = 1; i < table.rows.length; i++) {
-    table.rows[i].cells[0].innerText = i;
-}
+var rows = table.rows;
+var currentPage = 1;
+var rowsPerPage = 10;
 
 function filterTable() {
     var input, filter, table, tr, td, i, txtValue;
@@ -110,7 +134,7 @@ function filterTable() {
     table = document.getElementById("myTable");
     tr = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
+    for (i = 1; i < tr.length; i++) {
         var found = false;
         for (var j = 1; j < tr[i].cells.length; j++) {
             td = tr[i].getElementsByTagName("td")[j];
@@ -129,6 +153,37 @@ function filterTable() {
         }
     }
 }
+
+function showPage(page) {
+    var start = (page - 1) * rowsPerPage + 1;
+    var end = start + rowsPerPage - 1;
+
+    for (var i = 1; i < rows.length; i++) {
+        if (i >= start && i <= end) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+
+    document.getElementById("pageIndicator").innerText = "Page " + page;
+}
+
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+}
+
+function nextPage() {
+    if (currentPage < Math.ceil((rows.length - 1) / rowsPerPage)) {
+        currentPage++;
+        showPage(currentPage);
+    }
+}
+
+showPage(currentPage);
 </script>
 
 </body>
